@@ -23,10 +23,8 @@ A full-stack case management application for Her Majesty's Courts and Tribunals 
 - Dashboard analytics and metrics
 - API endpoints for frontend/backend integration
 - Environment variable handling
-- Logging via Winston
-- Docker-ready setup
-- Health check and 404 handling
-- Secure input/output rendering
+- 404 handling
+
 
 ---
 
