@@ -1,0 +1,43 @@
+{% extends "template.njk" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper">
+    <h1 class="govuk-heading-l">Preview Case</h1>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Full Name</dt>
+        <dd class="govuk-summary-list__value">{{ case.firstName }} {{ case.lastName }}</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Title</dt>
+        <dd class="govuk-summary-list__value">{{ case.title }}</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Description</dt>
+        <dd class="govuk-summary-list__value">{{ case.description }}</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Status</dt>
+        <dd class="govuk-summary-list__value">{{ case.status }}</dd>
+      </div>
+    </dl>
+
+    <form method="POST" action="/cases/confirm">
+      <input type="hidden" name="firstName" value="{{ case.firstName }}">
+      <input type="hidden" name="lastName" value="{{ case.lastName }}">
+      <input type="hidden" name="title" value="{{ case.title }}">
+      <input type="hidden" name="description" value="{{ case.description }}">
+      <input type="hidden" name="status" value="{{ case.status }}">
+      {% if case.notes %}
+        <input type="hidden" name="notes" value="{{ case.notes[0].text }}">
+      {% endif %}
+
+      <button class="govuk-button" type="submit">Confirm and Submit</button>
+    </form>
+
+    <a class="govuk-link govuk-!-margin-top-4" href="/case-new">← Go Back to Edit</a>
+  </main>
+</div>
+{% endblock %}

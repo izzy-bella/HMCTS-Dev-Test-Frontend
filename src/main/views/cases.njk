@@ -1,0 +1,95 @@
+{% extends "template.njk" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper">
+    <h1 class="govuk-heading-xl">All Cases</h1>
+
+    {% if successMessage %}
+      <div class="govuk-notification-banner govuk-notification-banner--success">
+        <div class="govuk-notification-banner__content">
+          <p class="govuk-notification-banner__heading">{{ successMessage }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <form class="govuk-form-group" method="GET" action="/cases">
+      <input class="govuk-input" name="q" type="text" value="{{ query }}" placeholder="Search by title, number, description">
+      <button class="govuk-button govuk-button--secondary govuk-!-margin-top-1" type="submit">Search</button>
+    </form>
+
+    <a href="/case-new" class="govuk-button govuk-button--primary govuk-!-margin-bottom-4">+ Add New Case</a>
+
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">ID</th>
+          <th class="govuk-table__header">Case Number</th>
+          <th class="govuk-table__header">Title</th>
+          <th class="govuk-table__header">Description</th>
+          <th class="govuk-table__header">Status</th>
+          <th class="govuk-table__header">
+            Created Date
+            <a href="?sort=createdDate_asc{% if query %}&q={{ query }}{% endif %}" title="Sort Asc">↑</a>
+            <a href="?sort=createdDate_desc{% if query %}&q={{ query }}{% endif %}" title="Sort Desc">↓</a>
+          </th>
+          <th class="govuk-table__header">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% for case in cases %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">{{ case.id }}</td>
+          <td class="govuk-table__cell">{{ case.caseNumber }}</td>
+          <td class="govuk-table__cell">{{ case.title }}</td>
+          <td class="govuk-table__cell">{{ case.description }}</td>
+          <td class="govuk-table__cell">{{ case.status }}</td>
+          <td class="govuk-table__cell">{{ case.createdDate | formatDate }}</td>
+          <td class="govuk-table__cell">
+            <a class="govuk-link" href="/cases/{{ case.id }}">View</a> |
+            <a class="govuk-link" href="/cases/{{ case.id }}/edit">Edit</a> |
+            <form method="POST" action="/cases/{{ case.id }}/delete" style="display:inline">
+              <button type="submit" class="govuk-link" style="background:none;border:none;padding:0;color:#1d70b8;cursor:pointer">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if totalPages > 1 %}
+    <nav class="govuk-pagination" role="navigation" aria-label="Pagination">
+      <ul class="govuk-pagination__list">
+        {% if page > 1 %}
+          <li class="govuk-pagination__item govuk-pagination__item--prev">
+            <a class="govuk-link govuk-pagination__link" href="?page={{ page - 1 }}{% if query %}&q={{ query }}{% endif %}">
+              <span class="govuk-pagination__link-title">Previous</span>
+            </a>
+          </li>
+        {% endif %}
+
+        {% for p in range(1, totalPages + 1) %}
+          <li class="govuk-pagination__item {% if p == page %}govuk-pagination__item--current{% endif %}">
+            {% if p == page %}
+              <span class="govuk-pagination__link govuk-pagination__link--current">{{ p }}</span>
+            {% else %}
+              <a class="govuk-link govuk-pagination__link" href="?page={{ p }}{% if query %}&q={{ query }}{% endif %}">{{ p }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+
+        {% if page < totalPages %}
+          <li class="govuk-pagination__item govuk-pagination__item--next">
+            <a class="govuk-link govuk-pagination__link" href="?page={{ page + 1 }}{% if query %}&q={{ query }}{% endif %}">
+              <span class="govuk-pagination__link-title">Next</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+
+    <a href="/dashboard" class="govuk-link govuk-!-margin-top-4 govuk-button govuk-button--secondary">← Back to Dashboard</a>
+  </main>
+</div>
+{% endblock %}

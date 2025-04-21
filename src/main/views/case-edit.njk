@@ -1,0 +1,50 @@
+{% extends "template.njk" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper">
+    <h1 class="govuk-heading-xl">Edit Case</h1>
+
+    <form method="POST" action="/cases/{{ case.id }}/edit">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="title">Title</label>
+        <input class="govuk-input" id="title" name="title" type="text" value="{{ case.title }}" required>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="description">Description</label>
+        <textarea class="govuk-textarea" id="description" name="description" rows="3" required>{{ case.description }}</textarea>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="status">Status</label>
+        <select class="govuk-select" id="status" name="status" required>
+          <option value="Open" {% if case.status == "Open" %}selected{% endif %}>Open</option>
+          <option value="Closed" {% if case.status == "Closed" %}selected{% endif %}>Closed</option>
+          <option value="In Progress" {% if case.status == "In Progress" %}selected{% endif %}>In Progress</option>
+          <option value="Overdue" {% if case.status == "Overdue" %}selected{% endif %}>Overdue</option>
+        </select>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="notes">Add a Note (optional)</label>
+        <textarea class="govuk-textarea" id="notes" name="notes" rows="2"></textarea>
+      </div>
+
+      {% if case.notes %}
+        <div class="govuk-form-group">
+          <h2 class="govuk-heading-m">Previous Notes</h2>
+          <ul class="govuk-list govuk-list--bullet">
+            {% for note in case.notes %}
+              <li><strong>{{ note.date | formatDate }}:</strong> {{ note.text }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <button class="govuk-button" type="submit">Save Changes</button>
+      <a class="govuk-button govuk-button--secondary" href="/cases">Cancel</a>
+    </form>
+  </main>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "template.njk" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper">
+    <h1 class="govuk-heading-xl">Add New Case</h1>
+
+    <form method="POST" action="/case-new/confirm" class="govuk-!-margin-top-6">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="firstName">First Name</label>
+        <input class="govuk-input" id="firstName" name="firstName" type="text" required>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="lastName">Last Name</label>
+        <input class="govuk-input" id="lastName" name="lastName" type="text" required>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="title">Case Title</label>
+        <input class="govuk-input" id="title" name="title" type="text" required>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="description">Description</label>
+        <textarea class="govuk-textarea" id="description" name="description" rows="3" required></textarea>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="status">Status</label>
+        <select class="govuk-select" id="status" name="status" required>
+          <option value="Open">Open</option>
+          <option value="Closed">Closed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Overdue">Overdue</option>
+        </select>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="notes">Initial Notes (optional)</label>
+        <textarea class="govuk-textarea" id="notes" name="notes" rows="2"></textarea>
+      </div>
+
+      <button class="govuk-button" type="submit">Submit</button>
+    </form>
+
+    <a class="govuk-link govuk-!-margin-top-4" href="/cases">← Back to Case List</a>
+  </main>
+</div>
+{% endblock %}

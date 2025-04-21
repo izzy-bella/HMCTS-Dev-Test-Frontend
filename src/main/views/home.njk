@@ -1,0 +1,43 @@
+{% extends "template.njk" %}
+
+{% block pageTitle %}
+  HMCTS Case Management
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">HMCTS Case Management</h1>
+
+  <p class="govuk-body">
+    A concept demo which shows an example of how a case manager could integrate with the GOV.UK Forms product
+  </p>
+
+  <p class="govuk-body govuk-!-margin-bottom-6">
+    This prototype has not been tested with users and is only a concept idea
+  </p>
+
+  <h2 class="govuk-heading-l">Features</h2>
+
+  <p class="govuk-body">Features that are currently prototyped are:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Filtering and searching for a case</li>
+    <li>Pagination through a list of cases</li>
+    <li>View a case detail</li>
+    <li>View attachments that have been made through GOV.UK Forms</li>
+    <li>Change a case status or add a note to a case</li>
+    <li>See activity log of a case</li>
+     <li>Case Metrics Overview</li>
+  </ul>
+
+  <p class="govuk-body">Features that could be prototyped are:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Sort by (case status, updated last)</li>
+    <li>Route to the right team based on form submission</li>
+    <li>View if a payment has been made for a case</li>
+  </ul>
+
+  <div class="govuk-!-margin-top-6">
+    <a href="/sign-in" class="govuk-button govuk-button--start" role="button">
+      Start now
+    </a>
+  </div>
+{% endblock %}

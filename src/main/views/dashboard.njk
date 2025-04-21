@@ -1,0 +1,81 @@
+{% extends "template.njk" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content">
+
+    <h1 class="govuk-heading-xl">HMCTS Case Management Dashboard</h1>
+
+    <p class="govuk-body-l">
+      This is your case management dashboard. You can search for cases, view details, manage case info, and get insights.
+    </p>
+
+    {# ================= Analytics Grid Section ================= #}
+  <div class="govuk-grid-row govuk-!-margin-top-6">
+    <div class="govuk-grid-column-one-quarter">
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-1">{{ openCases }}</h1>
+      <p class="govuk-body govuk-!-font-weight-bold">
+        <a href="#" class="govuk-link">Open cases</a>
+      </p>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-1">{{ closedCases }}</h1>
+      <p class="govuk-body govuk-!-font-weight-bold">
+        <a href="#" class="govuk-link">Closed cases</a>
+      </p>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-1">{{ overdueCases }}</h1>
+      <p class="govuk-body govuk-!-font-weight-bold">
+        <a href="#" class="govuk-link">Overdue cases</a>
+      </p>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-1">{{ totalCases }}</h1>
+      <p class="govuk-body govuk-!-font-weight-bold">
+        <a href="/cases" class="govuk-link">Total Cases</a>
+      </p>
+    </div>
+  </div>
+
+    {# ================= Features List ================= #}
+    <h2 class="govuk-heading-l govuk-!-margin-top-6">Case Metrics Overview</h2>
+
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Metric</th>
+          <th scope="col" class="govuk-table__header">Description</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">Total cases</td>
+          <td class="govuk-table__cell">How many cases exist in the system</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">Open cases</td>
+          <td class="govuk-table__cell">Cases currently in progress</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">Closed cases</td>
+          <td class="govuk-table__cell">Cases marked complete</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">Overdue cases</td>
+          <td class="govuk-table__cell">Past due date, needs attention</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">Average resolution time</td>
+          <td class="govuk-table__cell">Avg. time taken to resolve a case</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    {# ================= Back Button ================= #}
+    <a href="/" class="govuk-button govuk-button--secondary govuk-!-margin-top-6">← Back to Home</a>
+
+  </main>
+</div>
+{% endblock %}

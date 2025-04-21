@@ -1,0 +1,29 @@
+{% extends "template.njk" %}
+
+{% block pageTitle %}
+  Sign in
+{% endblock %}
+
+{% block content %}
+<h1 class="govuk-heading-l">Sign in to HMCTS Case Platform</h1>
+
+<form method="POST" action="/sign-in" class="govuk-form-group">
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="username">Username</label>
+    <div class="govuk-hint">You can find this on the first email we sent you.</div>
+    <input class="govuk-input govuk-input--width-20" id="username" name="username" type="text" required>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="password">Password</label>
+    <input class="govuk-input govuk-input--width-20" id="password" name="password" type="password" required>
+  </div>
+
+  <p><a href="#">Forgotten your password?</a></p>
+
+  <button class="govuk-button" type="submit">Sign in</button>
+</form>
+
+<p><a href="#">Problems signing in?</a></p>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "template.njk" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper">
+    <h1 class="govuk-heading-xl">{{ case.title }}</h1>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Case Number</dt>
+        <dd class="govuk-summary-list__value">{{ case.caseNumber }}</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Name</dt>
+        <dd class="govuk-summary-list__value">{{ case.firstName }} {{ case.lastName }}</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Status</dt>
+        <dd class="govuk-summary-list__value">{{ case.status }}</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Created Date</dt>
+        <dd class="govuk-summary-list__value">{{ case.createdDate | formatDate }}</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Description</dt>
+        <dd class="govuk-summary-list__value">{{ case.description }}</dd>
+      </div>
+    </dl>
+
+    {% if case.notes and case.notes.length %}
+      <h2 class="govuk-heading-m govuk-!-margin-top-6">Case Notes</h2>
+      <div class="govuk-inset-text">
+        <ul class="govuk-list govuk-list--bullet">
+          {% for note in case.notes %}
+            <li>
+              <strong>{{ note.date | formatDate }}:</strong>
+              {{ note.text }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <div class="govuk-button-group">
+      <a class="govuk-button" href="/cases/{{ case.id }}/edit">Edit</a>
+
+      <form method="POST" action="/cases/{{ case.id }}/delete" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this case?');">
+        <button type="submit" class="govuk-button govuk-button--warning">Delete</button>
+      </form>
+
+      <a class="govuk-button govuk-button--secondary" href="/cases">Back</a>
+    </div>
+  </main>
+</div>
+{% endblock %}
